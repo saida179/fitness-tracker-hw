@@ -17,6 +17,14 @@ app.post("/api/workout/bulk", ({ body }, res) => {
         });
 });
 
+app.put("/api/workouts/:id", (req, res) => {
+    db.Workout.findByIdAndUpdate(req.params.id,
+        { $push: { exercises: req.body } }).then(dbWorkout => {
+            res.json(dbWorkout);
+        });
+});
+
+
 //app.get("/api/workout", (req, res) => {
     //workout.find({})
         //.sort({ date: -1 })
